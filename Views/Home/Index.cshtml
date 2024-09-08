@@ -1,0 +1,46 @@
+﻿@model List<SevenBridgeAMC>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@*<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>*@
+
+<div class="col-sm-12" style="background:green; color:white">
+     @TempData["SuccessMessage"]
+</div>
+<div class="mb-2">
+    <a asp-controller="SevenBridgeAMC" asp-action="Add">Add New Movie</a>
+</div>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Format</th>
+            <th>Showtime</th>
+            <th>Price</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var movie in Model)
+        {
+            <tr>
+                <td>@movie.Name</td>
+                <td>@movie.Format</td>
+                <td>@movie.Showtime</td>
+                @*<td>@movie.Price</td>*@
+                <td>@string.Format("{0:C2}", movie.Price)</td>
+                <td>
+                    <a asp-controller="SevenBridgeAMC" asp-action="Edit"
+                   asp-route-id="@movie.MovieId">Edit</a>
+                    <a asp-controller="SevenBridgeAMC" asp-action="Delete"
+                   asp-route-id="@movie.MovieId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
